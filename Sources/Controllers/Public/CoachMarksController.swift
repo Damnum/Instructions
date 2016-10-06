@@ -27,7 +27,7 @@ import UIKit
 
 //mark: Main Class
 /// Handles a set of coach marks, and display them successively.
-public class CoachMarksController {
+open class CoachMarksController {
     //mark: Public properties
     /// Implement the data source protocol and supply
     /// the coach marks to display.
@@ -90,11 +90,11 @@ public extension CoachMarksController {
 }
 
 //mark: - Flow management
-public extension CoachMarksController {
+extension CoachMarksController {
     /// Start displaying the coach marks.
     ///
     /// - Parameter parentViewController: View Controller to which attach self.
-    public func startOn(_ parentViewController: UIViewController) {
+    open func startOn(_ parentViewController: UIViewController) {
         guard let dataSource = self.dataSource else {
             print("startOn: snap! you didn't setup any datasource, the" +
                   "coach mark manager won't do anything.")
@@ -119,7 +119,7 @@ public extension CoachMarksController {
     /// viewWillDisappear.
     ///
     /// - Parameter immediately: `true` to stop immediately, without animations.
-    public func stop(immediately: Bool = false) {
+    open func stop(immediately: Bool = false) {
         if immediately {
             flow.stopFlow(immediately: true, userDidSkip: false, shouldCallDelegate: false)
         } else {
@@ -130,20 +130,20 @@ public extension CoachMarksController {
     /// Pause the display.
     /// This method is expected to be used by the delegate to
     /// stop the display, perform animation and resume display with `resume()`
-    func pause() {
+    open func pause() {
         flow.pause()
     }
 
     /// Resume the display.
     /// If the display wasn't paused earlier, this method won't do anything.
-    func resume() {
+    open func resume() {
         flow.resume()
     }
 }
 
 //mark: - Protocol Conformance | OverlayViewDelegate
 extension CoachMarksController: OverlayViewDelegate {
-    func didReceivedSingleTap() {
+    open func didReceivedSingleTap() {
         flow.showNextCoachMark()
     }
 }
